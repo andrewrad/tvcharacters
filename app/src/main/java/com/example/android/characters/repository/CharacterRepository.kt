@@ -7,6 +7,7 @@ import com.example.android.characters.database.CharacterDatabase
 import com.example.android.characters.database.DbEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+//import org.jsoup.Jsoup
 import java.lang.Exception
 
 class CharacterRepository(private val database : CharacterDatabase) {
@@ -28,11 +29,17 @@ class CharacterRepository(private val database : CharacterDatabase) {
         val _entityList = ArrayList<DbEntity>()
 
         for(it in receivedCharacterList){
+
+            var s = it.Result
+            s = s.substring(s.indexOf(">") + 1)  //https://stackoverflow.com/questions/12595019/how-to-get-a-string-between-two-characters
+            s = s.substring(0, s.indexOf("<"))
+
             val entity = DbEntity(
                 firstUrl = it.FirstURL,
                 icon = it.Icon.URL,
                 result = it.Result,
-                text = it.Text
+                text = it.Text,
+                name = s
             )
             _entityList.add(entity)
         }

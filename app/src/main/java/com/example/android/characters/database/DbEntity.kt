@@ -19,5 +19,8 @@ data class DbEntity(
     var result: String = "",
 
     @ColumnInfo  //(name = " text")
-    var text: String = ""
+    var text: String = "",
+
+    @ColumnInfo
+    var name: String = ""
 )
