@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 
-@Database(entities = [DbEntity::class, DbEntityFts::class], version = 16, exportSchema = false)
+@Database(entities = [DbEntity::class, DbEntityFts::class], version = 17, exportSchema = false)
 abstract class CharacterDatabase : RoomDatabase(){
     abstract val DatabaseDao: DatabaseDao
 

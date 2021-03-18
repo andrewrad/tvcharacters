@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Characters</string>
+    <string name="app_name">TVCharacters</string>
     <string name="order_asc">Ascending</string>
     <string name="order_desc">Descending</string>
     <string name="order_random">With Icons Only</string>

@@ -1,5 +1,6 @@
 package com.example.android.characters.api
 
+import com.example.android.characters.APPENDED_URL
 import com.google.gson.GsonBuilder
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -13,7 +14,6 @@ const val BASE_URL = "https://duckduckgo.com/"
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
-
 
 private val gson = GsonBuilder()
     .setLenient()
@@ -29,9 +29,12 @@ object CharacterApi{
 }
 
 interface CharacterApiService {
-    @GET("?q=simpsons+characters&format=json")
-    suspend fun getSimpsonsCharacters() : ParentJsonObject
+
+
+
+    @GET(APPENDED_URL)
+    suspend fun getSimpsonsCharacters() : ParentJsonObject  //TODO:
 
     @GET("/i/{image_name}")
-    suspend fun getImage(@Path("image_name") image: String)
+    suspend fun getImage(@Path("image_name") image: String) //TODO:
 }

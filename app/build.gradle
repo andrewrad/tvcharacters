@@ -29,6 +29,27 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions "version"
+
+    productFlavors{
+        simpsons{
+            versionCode 1
+            dimension "version"
+            applicationId "com.example.android.characters.simpsons"
+//            applicationIdSuffix ".simpsons"
+            versionNameSuffix "-simpsons"
+        }
+        wire{
+            versionCode 1
+            dimension "version"
+            applicationId "com.example.android.characters.wire"
+//            applicationIdSuffix ".wire"
+            versionNameSuffix "-wire"
+        }
+
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
