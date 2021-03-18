@@ -21,6 +21,6 @@ interface DatabaseDao {
     @Query("select * from dbTable where icon != \"\" order by name asc")
     fun getAllNamesFromDb(): List<DbEntity>
 
-    @Query("SELECT * FROM dbTable JOIN dbTableFts ON dbTable.name == dbTableFts.name WHERE dbTableFts.name MATCH :query")
+    @Query("SELECT * FROM dbTable JOIN dbTableFts ON dbTable.name == dbTableFts.name WHERE dbTableFts.name MATCH :query") //MATCH :query OR dbTableFts.name MATCH :query")
     fun getAllNamesFromDbFTS(query: String): List<DbEntity>
 }

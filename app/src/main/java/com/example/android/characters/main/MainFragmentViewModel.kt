@@ -25,17 +25,15 @@ class MainFragmentViewModel(val database: DatabaseDao, application: Application)
     val charDetails
         get() = _charDetails
 
-    val _userQuery = MutableLiveData<String>()
-
     init{
         getCharacterDataFromNetwork()
-        updateFilter(DisplayOrderEnum.ASCENDING)
     }
 
     fun getCharacterDataFromNetwork(){
         viewModelScope.launch {
             try{
-                characterRepository.getCharactersFromNetwork()
+                characterRepository.getCharactersFromNetwork() //fills db with data from network
+                updateFilter(DisplayOrderEnum.ASCENDING)
             } catch(e:IOException){}
         }
     }
@@ -52,10 +50,10 @@ class MainFragmentViewModel(val database: DatabaseDao, application: Application)
         searchView.setOnQueryTextListener(object :  SearchView.OnQueryTextListener {
 
             override fun onQueryTextChange(newText: String): Boolean {
-                _userQuery.value = newText
-
-                queryPartialSearch(newText)
-
+                if(newText.isNotEmpty())
+                    queryPartialSearch(newText)
+                else
+                    updateFilter(DisplayOrderEnum.ASCENDING)
                 return false
             }
 
@@ -79,7 +77,6 @@ class MainFragmentViewModel(val database: DatabaseDao, application: Application)
             try{
                 charactersFromDb.value = characterRepository.getCharactersFromDb(selection)
             } catch(e:Exception){
-
             }
         }
     }

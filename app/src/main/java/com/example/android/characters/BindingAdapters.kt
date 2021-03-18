@@ -41,3 +41,10 @@ fun TextView.setDetailTextViewName(item: TvCharacter){
         text = item.name
     }
 }
+
+@BindingAdapter("detailTextViewText")
+fun TextView.setDetailTextViewText(item: TvCharacter){
+    item.let{
+        text = item.text
+    }
+}
