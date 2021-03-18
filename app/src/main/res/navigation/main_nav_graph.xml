@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.android.characters.main.MainFragment"
-        android:label="fragment_main"
+        android:label="Characters"
         tools:layout="@layout/fragment_main" >
         <action
             android:id="@+id/action_showDetail"
@@ -18,18 +18,12 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.example.android.characters.detail.DetailFragment"
-        android:label="fragment_detail"
+        android:label=""
         tools:layout="@layout/fragment_detail">
 
-        <!--        <action-->
-        <!--            android:id="@+id/action_go_back"-->
-        <!--            app:popUpTo="@id/mainFragment">-->
-
-        <!--        </action>-->
-
-<!--        <argument-->
-<!--            android:name="selectedAsteroid"-->
-<!--            app:argType="com.udacity.asteroidradar.Asteroid"/>-->
+        <argument
+            android:name="selectedTvCharacter"
+            app:argType="com.example.android.characters.repository.TvCharacter"/>
     </fragment>
 
 </navigation>

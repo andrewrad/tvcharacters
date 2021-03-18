@@ -1,26 +1,42 @@
 package com.example.android.characters.database
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
+import com.example.android.characters.repository.TvCharacter
 
-@Entity(tableName="all_characters")
+@Entity(tableName="dbTable")
 data class DbEntity(
-    @PrimaryKey//(autoGenerate = true)
+    //@PrimaryKey//(autoGenerate = true)
     var charId: Long = 0L,
 
-    @ColumnInfo  //(name = "firstUrl")
+    //@ColumnInfo  //(name = "firstUrl")
     var firstUrl: String = "",
 
-    @ColumnInfo  //(name = "icon")
+    //@ColumnInfo  //(name = "icon")
     var icon: String = "",
 
-    @ColumnInfo  //(name = "result")
+    //@ColumnInfo  //(name = "result")
     var result: String = "",
 
-    @ColumnInfo  //(name = " text")
+    //@ColumnInfo  //(name = " text")
     var text: String = "",
 
-    @ColumnInfo
+    @PrimaryKey
     var name: String = ""
-)
+){
+    companion object {
+        fun from(tvCharacter: TvCharacter): DbEntity {
+            return DbEntity(
+                tvCharacter.charId,
+                tvCharacter.firstUrl,
+                tvCharacter.icon,
+                tvCharacter.result,
+                tvCharacter.text,
+                tvCharacter.name
+            )
+        }
+    }
+
+    fun toTvCharacter(): TvCharacter{
+        return TvCharacter(charId, firstUrl, icon, result, text, name)
+    }
+}

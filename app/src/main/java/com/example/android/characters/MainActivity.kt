@@ -2,30 +2,25 @@ package com.example.android.characters
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.lifecycle.lifecycleScope
-import com.example.android.characters.api.CharacterApi
-import kotlinx.coroutines.launch
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var appBarConfiguration : AppBarConfiguration
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        test()
+        val navController = findNavController(R.id.nav_host_fragment)
+        appBarConfiguration = AppBarConfiguration(navController.graph)
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
     }
 
-//    // TODO: remove
-    fun test(){
-
-        lifecycleScope.launch{
-            val chars = CharacterApi.retrofitService.getSimpsonsCharacters()
-            Log.i("yep", "yep chars: $chars")
-
-            val pic = CharacterApi.retrofitService.getImage("f0eb79ee.png") //todo:remove
-            Log.i("yep2", "yep pic: $pic")
-        }
-
-        Log.i("test end", "test end: ")
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = this.findNavController(R.id.nav_host_fragment)
+        return NavigationUI.navigateUp(navController, appBarConfiguration)
     }
 }
