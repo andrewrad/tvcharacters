@@ -6,7 +6,7 @@
     <data>
         <variable
             name="tvCharacter"
-            type="com.example.android.characters.repository.TvCharacter" />
+            type="com.example.android.characters.ui.TvCharacterUiModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

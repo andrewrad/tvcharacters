@@ -1,6 +1,6 @@
 package com.example.android.characters.api
 
-import com.example.android.characters.APPENDED_URL
+import com.example.android.characters.Util
 import com.google.gson.GsonBuilder
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -16,7 +16,7 @@ private val moshi = Moshi.Builder()
     .build()
 
 private val gson = GsonBuilder()
-    .setLenient()
+//    .setLenient()
     .create()
 
 private val retrofit = Retrofit.Builder()
@@ -30,10 +30,8 @@ object CharacterApi{
 
 interface CharacterApiService {
 
-
-
-    @GET(APPENDED_URL)
-    suspend fun getSimpsonsCharacters() : ParentJsonObject  //TODO:
+    @GET(Util.APPENDED_URL)
+    suspend fun getSimpsonsCharacters() : CharacterResponse  //TODO:
 
     @GET("/i/{image_name}")
     suspend fun getImage(@Path("image_name") image: String) //TODO:

@@ -1,4 +1,7 @@
 package com.example.android.characters
 
-
-const val APPENDED_URL = "?q=simpsons+characters&format=json"  //simpsons
+class Util {
+    companion object {
+        const val APPENDED_URL = "?q=simpsons+characters&format=json"  //simpsons
+    }
+}

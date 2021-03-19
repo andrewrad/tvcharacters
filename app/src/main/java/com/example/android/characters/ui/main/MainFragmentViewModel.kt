@@ -1,7 +1,9 @@
-package com.example.android.characters.main
+package com.example.android.characters.ui.main
 
 import android.app.Application
+import android.util.Log
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,29 +12,26 @@ import com.example.android.characters.database.CharacterDatabase
 import com.example.android.characters.database.DatabaseDao
 import com.example.android.characters.database.DbEntity
 import com.example.android.characters.repository.CharacterRepository
-import com.example.android.characters.repository.TvCharacter
+import com.example.android.characters.ui.TvCharacterUiModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.io.IOException
 import java.lang.Exception
+import javax.inject.Inject
 
-class MainFragmentViewModel(val database: DatabaseDao, application: Application) : ViewModel()  {
-
-    private val characterRepository = CharacterRepository(CharacterDatabase.getInstance(application))
+@HiltViewModel
+class MainFragmentViewModel @Inject constructor(private val repo : CharacterRepository) : ViewModel()  {
 
     var charactersFromDb = MutableLiveData<List<DbEntity>>()  //observed in MainFragment as recyclerView Adapter
+//    val charactersFromDb: LiveData<List<DbEntity>> = _charactersFromDb
 
-    private var _charDetails = MutableLiveData<TvCharacter?>()
-    val charDetails
-        get() = _charDetails
-
-    init{
-        getCharacterDataFromNetwork()
-    }
+    private var _charDetails = MutableLiveData<TvCharacterUiModel>()
+    val charDetails: LiveData<TvCharacterUiModel> = _charDetails
 
     fun getCharacterDataFromNetwork(){
         viewModelScope.launch {
             try{
-                characterRepository.getCharactersFromNetwork() //fills db with data from network
+                repo.getCharactersFromNetwork() //fills db with data from network
                 updateFilter(DisplayOrderEnum.ASCENDING)
             } catch(e:IOException){}
         }
@@ -67,17 +66,14 @@ class MainFragmentViewModel(val database: DatabaseDao, application: Application)
     private fun queryPartialSearch(query: String){
         viewModelScope.launch {
             try{
-                characterRepository.searchCharactersFromDb("*$query*").let{charactersFromDb.value = it}
+                repo.searchCharactersFromDb("*$query*").let{charactersFromDb.value = it}
             } catch(e:IOException){}
         }
     }
 
     fun updateFilter(selection: DisplayOrderEnum){
         viewModelScope.launch {
-            try{
-                charactersFromDb.value = characterRepository.getCharactersFromDb(selection)
-            } catch(e:Exception){
-            }
+                charactersFromDb.value = repo.getCharactersFromDb(selection)
         }
     }
 }

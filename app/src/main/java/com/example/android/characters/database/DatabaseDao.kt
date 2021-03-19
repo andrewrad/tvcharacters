@@ -13,14 +13,14 @@ interface DatabaseDao {
     suspend fun insert(characterList: List<DbEntity>)
 
     @Query("select * from dbTable order by name desc")
-    fun getAllNamesFromDbDesc(): List<DbEntity>
+    suspend fun getAllNamesFromDbDesc(): List<DbEntity>
 
     @Query("select * from dbTable order by name asc")
-    fun getAllNamesFromDbAsc(): List<DbEntity>
+    suspend fun getAllNamesFromDbAsc(): List<DbEntity>
 
     @Query("select * from dbTable where icon != \"\" order by name asc")
-    fun getAllNamesFromDb(): List<DbEntity>
+    suspend fun getAllNamesFromDb(): List<DbEntity>
 
     @Query("SELECT * FROM dbTable JOIN dbTableFts ON dbTable.name == dbTableFts.name WHERE dbTableFts.name MATCH :query") //MATCH :query OR dbTableFts.name MATCH :query")
-    fun getAllNamesFromDbFTS(query: String): List<DbEntity>
+    suspend fun getAllNamesFromDbFTS(query: String): List<DbEntity>
 }

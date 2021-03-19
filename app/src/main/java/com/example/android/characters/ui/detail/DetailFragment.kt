@@ -1,4 +1,4 @@
-package com.example.android.characters.detail
+package com.example.android.characters.ui.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.android.characters.R
 import com.example.android.characters.databinding.FragmentDetailBinding
-import com.example.android.characters.repository.TvCharacter
+import com.example.android.characters.ui.TvCharacterUiModel
+import dagger.hilt.android.AndroidEntryPoint
 
 class DetailFragment : Fragment() {
 
@@ -18,7 +19,7 @@ class DetailFragment : Fragment() {
 
         binding.lifecycleOwner = this
 
-        val arguments = arguments?.get("selectedTvCharacter") as TvCharacter
+        val arguments = arguments?.get("selectedTvCharacter") as TvCharacterUiModel
 
         binding.tvCharacter = arguments
 

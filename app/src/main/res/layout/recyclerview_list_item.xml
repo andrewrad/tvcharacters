@@ -10,7 +10,7 @@
 
         <variable
             name="clickListener"
-            type="com.example.android.characters.main.ItemClickListener" />
+            type="com.example.android.characters.ui.main.ItemClickListener" />
     </data>
 
 

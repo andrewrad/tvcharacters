@@ -1,10 +1,10 @@
-package com.example.android.characters.repository
+package com.example.android.characters.ui
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class TvCharacter (
+data class TvCharacterUiModel (
     val charId: Long,
     val firstUrl: String,
     val icon: String,
