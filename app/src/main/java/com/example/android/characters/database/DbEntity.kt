@@ -25,8 +25,8 @@ data class DbEntity(
             )
         }
     }
-
-    fun toTvCharacter(): TvCharacterUiModel {
-        return TvCharacterUiModel(charId, firstUrl, icon, result, text, name)
-    }
+//
+//    fun toTvCharacter(): TvCharacterUiModel {
+//        return TvCharacterUiModel(charId, firstUrl, icon, result, text, name)
+//    }
 }

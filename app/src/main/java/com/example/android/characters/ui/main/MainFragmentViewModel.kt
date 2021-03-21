@@ -37,8 +37,8 @@ class MainFragmentViewModel @Inject constructor(private val repo : CharacterRepo
         }
     }
 
-    fun onCharacterClicked(id: DbEntity) {
-        _charDetails.value = id.toTvCharacter()
+    fun onCharacterClicked(id: TvCharacterUiModel) {
+        _charDetails.value = id
     }
 
     fun visited() {

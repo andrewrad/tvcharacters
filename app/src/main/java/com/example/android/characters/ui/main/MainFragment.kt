@@ -11,23 +11,28 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.android.characters.DisplayOrderEnum
 import com.example.android.characters.R
+//import com.example.android.characters.database.DbEntity
 import com.example.android.characters.databinding.FragmentMainBinding
 import com.example.android.characters.databinding.FragmentMainLandBinding
+import com.example.android.characters.ui.toUiModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
 
-    private val viewModel : MainFragmentViewModel by activityViewModels()
+    private val viewModel: MainFragmentViewModel by activityViewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         val isTablet = requireContext().resources.getBoolean(R.bool.isTablet)
 
-        when{
+        when {
             isTablet -> {
-                val binding: FragmentMainLandBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_main_land, container, false)
+                val binding: FragmentMainLandBinding =
+                    DataBindingUtil.inflate(inflater, R.layout.fragment_main_land, container, false)
 
                 viewModel.getCharacterDataFromNetwork()
 
@@ -41,16 +46,15 @@ class MainFragment : Fragment() {
                 binding.characterRecycler.adapter = adapter
 
                 viewModel.charactersFromDb.observe(viewLifecycleOwner, Observer {
-                    it?.let{
-                        adapter.data(it)   //send data to the recyclerView adapter
-                    }
+                    it?.let { it -> adapter.data(it.map { it.toUiModel() }) }
                 })
 
                 setHasOptionsMenu(true)
                 return binding.root
             }
             else -> {
-                val binding: FragmentMainBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
+                val binding: FragmentMainBinding =
+                    DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
 
                 viewModel.getCharacterDataFromNetwork()
 
@@ -63,14 +67,12 @@ class MainFragment : Fragment() {
 
                 binding.characterRecycler.adapter = adapter
 
-                viewModel.charactersFromDb.observe(viewLifecycleOwner, Observer {
-                    it?.let{
-                        adapter.data(it)   //send data to the recyclerView adapter
-                    }
+                viewModel.charactersFromDb.observe(viewLifecycleOwner, Observer { it ->
+                    it?.let { it -> adapter.data(it.map { it.toUiModel() }) }   //send data to the recyclerView adapter
                 })
 
                 viewModel.charDetails.observe(viewLifecycleOwner, Observer {
-                    it?.let{
+                    it?.let {
                         this.findNavController().navigate(MainFragmentDirections.actionShowDetail())
                     }
                 })

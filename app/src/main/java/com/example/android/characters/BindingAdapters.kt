@@ -6,14 +6,13 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.android.characters.api.BASE_URL
-import com.example.android.characters.database.DbEntity
 import com.example.android.characters.ui.TvCharacterUiModel
 
 
 //Recycler View list item binding:
 
 @BindingAdapter("textViewName")
-fun TextView.setTextViewName(item: DbEntity?) {
+fun TextView.setTextViewName(item: TvCharacterUiModel?) {
     item?.let {
         text = item.name
     }

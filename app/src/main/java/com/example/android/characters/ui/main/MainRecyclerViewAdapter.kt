@@ -3,12 +3,12 @@ package com.example.android.characters.ui.main
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.android.characters.database.DbEntity
 import com.example.android.characters.databinding.RecyclerviewListItemBinding
+import com.example.android.characters.ui.TvCharacterUiModel
 
 class MainRecyclerViewAdapter(val clickListener: ItemClickListener) :
-    RecyclerView.Adapter<ViewHolder>() {  //ListAdapter<DbEntity, ViewHolder>(){//:
-    var data = listOf<DbEntity>()
+    RecyclerView.Adapter<ViewHolder>() {
+    var data = listOf<TvCharacterUiModel>()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -26,7 +26,7 @@ class MainRecyclerViewAdapter(val clickListener: ItemClickListener) :
         return data.size
     }
 
-    fun data(it: List<DbEntity>) {
+    fun data(it: List<TvCharacterUiModel>) {
         data = it
     }
 }
@@ -35,9 +35,9 @@ class MainRecyclerViewAdapter(val clickListener: ItemClickListener) :
 class ViewHolder private constructor(val binding: RecyclerviewListItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: DbEntity, clickListener: ItemClickListener) {
-        binding.dbEntity = item
-        binding.clickListener = clickListener
+    fun bind(item: TvCharacterUiModel, clickListener: ItemClickListener) {
+        binding.tvChar = item  //bind to data variable in xml file
+        binding.clickListener = clickListener  //bind to data variable in xml file
         binding.executePendingBindings()
     }
 
@@ -51,8 +51,8 @@ class ViewHolder private constructor(val binding: RecyclerviewListItemBinding) :
 }
 
 
-class ItemClickListener(val clickListener: (name: DbEntity) -> Unit) {
-    fun onClick(character: DbEntity) = clickListener(character)
+class ItemClickListener(val clickListener: (name: TvCharacterUiModel) -> Unit) {
+    fun onClick(character: TvCharacterUiModel) = clickListener(character)
 }
 
 

@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="dbEntity"
-            type= "com.example.android.characters.database.DbEntity" />
+            name="tvChar"
+            type= "com.example.android.characters.ui.TvCharacterUiModel" />
 
         <variable
             name="clickListener"
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="ExtraText"
-        android:onClick="@{() -> clickListener.onClick(dbEntity)}">
+        android:onClick="@{() -> clickListener.onClick(tvChar)}">
 
         <TextView
             android:id="@+id/textview_name"
@@ -33,7 +33,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:textViewName="@{dbEntity}" />
+            app:textViewName="@{tvChar}" />
 
 <!--        <TextView-->
 <!--            android:id="@+id/textview_date"-->
