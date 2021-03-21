@@ -7,11 +7,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.android.characters.DisplayOrderEnum
 import com.example.android.characters.R
-import com.example.android.characters.database.CharacterDatabase
 import com.example.android.characters.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,11 +26,23 @@ class MainFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val binding: FragmentMainBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
 
+        val isTablet = requireContext().resources.getBoolean(R.bool.isTablet)
+
+        when{
+            isTablet -> {
+            }
+            else -> {
+            }
+        }
+
+
 //        val application = requireNotNull(this.activity).application
 //        val dataSource = CharacterDatabase.getInstance(application).DatabaseDao
 //        val viewModelFactory = MainFragmentViewModelFactory(dataSource, application)
 //
 //        val viewModel = ViewModelProvider(this, viewModelFactory).get(MainFragmentViewModel::class.java)
+
+
 
         viewModel.getCharacterDataFromNetwork()
 

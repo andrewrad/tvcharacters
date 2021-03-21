@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="main_fragment_view_model"
             type="com.example.android.characters.ui.main.MainFragmentViewModel" />
