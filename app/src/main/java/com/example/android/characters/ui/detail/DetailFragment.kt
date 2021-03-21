@@ -17,11 +17,11 @@ class DetailFragment : Fragment() {
 
         val binding: FragmentDetailBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
 
-        binding.lifecycleOwner = this
-
-        val arguments = arguments?.get("selectedTvCharacter") as TvCharacterUiModel
-
-        binding.tvCharacter = arguments
+//        binding.lifecycleOwner = this
+//
+//        val arguments = arguments?.get("selectedTvCharacter") as TvCharacterUiModel
+//
+//        binding.tvCharacter = arguments
 
         return binding.root
     }

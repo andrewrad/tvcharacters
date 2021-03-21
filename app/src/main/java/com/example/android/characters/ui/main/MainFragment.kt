@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.android.characters.DisplayOrderEnum
 import com.example.android.characters.R
 import com.example.android.characters.databinding.FragmentMainBinding
+import com.example.android.characters.databinding.FragmentMainLandBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,14 +25,74 @@ class MainFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val binding: FragmentMainBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
+//        val binding: FragmentMainBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
 
         val isTablet = requireContext().resources.getBoolean(R.bool.isTablet)
 
         when{
             isTablet -> {
+                val binding: FragmentMainLandBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_main_land, container, false)
+
+
+                viewModel.getCharacterDataFromNetwork()
+
+                binding.mainFragmentViewModelLand = viewModel
+                binding.lifecycleOwner = this
+
+                val adapter = MainRecyclerViewAdapter(ItemClickListener { id ->
+                    viewModel.onCharacterClicked(id)      //action to happen when item clicked
+                })
+
+                binding.characterRecycler.adapter = adapter
+
+                viewModel.charactersFromDb.observe(viewLifecycleOwner, Observer {
+                    it?.let{
+                        adapter.data(it)   //send data to the recyclerView adapter
+                    }
+                })
+
+                viewModel.charDetails.observe(viewLifecycleOwner, Observer {
+                    it?.let{
+//                        this.findNavController().navigate(MainFragmentDirections.actionShowDetail(it))
+                        viewModel.visited()
+                    }
+                })
+
+                setHasOptionsMenu(true)
+
+                return binding.root
             }
             else -> {
+                val binding: FragmentMainBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
+
+
+                viewModel.getCharacterDataFromNetwork()
+
+                binding.mainFragmentViewModel = viewModel
+                binding.lifecycleOwner = this
+
+                val adapter = MainRecyclerViewAdapter(ItemClickListener { id ->
+                    viewModel.onCharacterClicked(id)      //action to happen when item clicked
+                })
+
+                binding.characterRecycler.adapter = adapter
+
+                viewModel.charactersFromDb.observe(viewLifecycleOwner, Observer {
+                    it?.let{
+                        adapter.data(it)   //send data to the recyclerView adapter
+                    }
+                })
+
+                viewModel.charDetails.observe(viewLifecycleOwner, Observer {
+                    it?.let{
+                        this.findNavController().navigate(MainFragmentDirections.actionShowDetail(it))
+                        viewModel.visited()
+                    }
+                })
+
+                setHasOptionsMenu(true)
+
+                return binding.root
             }
         }
 
@@ -44,33 +105,35 @@ class MainFragment : Fragment() {
 
 
 
-        viewModel.getCharacterDataFromNetwork()
 
-        binding.mainFragmentViewModel = viewModel
-        binding.lifecycleOwner = this
 
-        val adapter = MainRecyclerViewAdapter(ItemClickListener { id ->
-            viewModel.onCharacterClicked(id)      //action to happen when item clicked
-        })
-
-        binding.characterRecycler.adapter = adapter
-
-        viewModel.charactersFromDb.observe(viewLifecycleOwner, Observer {
-            it?.let{
-                adapter.data(it)   //send data to the recyclerView adapter
-            }
-        })
-
-        viewModel.charDetails.observe(viewLifecycleOwner, Observer {
-            it?.let{
-                this.findNavController().navigate(MainFragmentDirections.actionShowDetail(it))
-                viewModel.visited()
-            }
-        })
-
-        setHasOptionsMenu(true)
-
-        return binding.root
+//        viewModel.getCharacterDataFromNetwork()
+//
+//        binding.mainFragmentViewModel = viewModel
+//        binding.lifecycleOwner = this
+//
+//        val adapter = MainRecyclerViewAdapter(ItemClickListener { id ->
+//            viewModel.onCharacterClicked(id)      //action to happen when item clicked
+//        })
+//
+//        binding.characterRecycler.adapter = adapter
+//
+//        viewModel.charactersFromDb.observe(viewLifecycleOwner, Observer {
+//            it?.let{
+//                adapter.data(it)   //send data to the recyclerView adapter
+//            }
+//        })
+//
+//        viewModel.charDetails.observe(viewLifecycleOwner, Observer {
+//            it?.let{
+//                this.findNavController().navigate(MainFragmentDirections.actionShowDetail(it))
+//                viewModel.visited()
+//            }
+//        })
+//
+//        setHasOptionsMenu(true)
+//
+//        return binding.root
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
