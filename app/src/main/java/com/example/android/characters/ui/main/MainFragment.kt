@@ -5,6 +5,7 @@ import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -17,22 +18,16 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainFragment : Fragment() {
 
-    private val viewModel : MainFragmentViewModel by viewModels()
-
-//    private val viewModel: MainFragmentViewModel by lazy {
-//        ViewModelProvider(this).get(MainFragmentViewModel::class.java)
-//    }
+    private val viewModel : MainFragmentViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-//        val binding: FragmentMainBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
 
         val isTablet = requireContext().resources.getBoolean(R.bool.isTablet)
 
         when{
             isTablet -> {
                 val binding: FragmentMainLandBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_main_land, container, false)
-
 
                 viewModel.getCharacterDataFromNetwork()
 
@@ -51,20 +46,11 @@ class MainFragment : Fragment() {
                     }
                 })
 
-                viewModel.charDetails.observe(viewLifecycleOwner, Observer {
-                    it?.let{
-//                        this.findNavController().navigate(MainFragmentDirections.actionShowDetail(it))
-                        viewModel.visited()
-                    }
-                })
-
                 setHasOptionsMenu(true)
-
                 return binding.root
             }
             else -> {
                 val binding: FragmentMainBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
-
 
                 viewModel.getCharacterDataFromNetwork()
 
@@ -85,55 +71,14 @@ class MainFragment : Fragment() {
 
                 viewModel.charDetails.observe(viewLifecycleOwner, Observer {
                     it?.let{
-                        this.findNavController().navigate(MainFragmentDirections.actionShowDetail(it))
-                        viewModel.visited()
+                        this.findNavController().navigate(MainFragmentDirections.actionShowDetail())
                     }
                 })
 
                 setHasOptionsMenu(true)
-
                 return binding.root
             }
         }
-
-
-//        val application = requireNotNull(this.activity).application
-//        val dataSource = CharacterDatabase.getInstance(application).DatabaseDao
-//        val viewModelFactory = MainFragmentViewModelFactory(dataSource, application)
-//
-//        val viewModel = ViewModelProvider(this, viewModelFactory).get(MainFragmentViewModel::class.java)
-
-
-
-
-
-//        viewModel.getCharacterDataFromNetwork()
-//
-//        binding.mainFragmentViewModel = viewModel
-//        binding.lifecycleOwner = this
-//
-//        val adapter = MainRecyclerViewAdapter(ItemClickListener { id ->
-//            viewModel.onCharacterClicked(id)      //action to happen when item clicked
-//        })
-//
-//        binding.characterRecycler.adapter = adapter
-//
-//        viewModel.charactersFromDb.observe(viewLifecycleOwner, Observer {
-//            it?.let{
-//                adapter.data(it)   //send data to the recyclerView adapter
-//            }
-//        })
-//
-//        viewModel.charDetails.observe(viewLifecycleOwner, Observer {
-//            it?.let{
-//                this.findNavController().navigate(MainFragmentDirections.actionShowDetail(it))
-//                viewModel.visited()
-//            }
-//        })
-//
-//        setHasOptionsMenu(true)
-//
-//        return binding.root
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

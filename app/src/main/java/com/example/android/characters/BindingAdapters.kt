@@ -36,14 +36,10 @@ fun bindCharacterPicture(imgView: ImageView, item: TvCharacterUiModel) {
 
 @BindingAdapter("detailTextViewName")
 fun TextView.setDetailTextViewName(item: TvCharacterUiModel) {
-
     text = item.name
-
 }
 
 @BindingAdapter("detailTextViewText")
 fun TextView.setDetailTextViewText(item: TvCharacterUiModel) {
-
     text = item.text
-
 }

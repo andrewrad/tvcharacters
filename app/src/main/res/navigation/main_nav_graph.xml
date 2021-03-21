@@ -21,9 +21,9 @@
         android:label=""
         tools:layout="@layout/fragment_detail">
 
-        <argument
-            android:name="selectedTvCharacter"
-            app:argType="com.example.android.characters.ui.TvCharacterUiModel"/>
+<!--        <argument-->
+<!--            android:name="selectedTvCharacter"-->
+<!--            app:argType="com.example.android.characters.ui.TvCharacterUiModel"/>-->
     </fragment>
 
 </navigation>

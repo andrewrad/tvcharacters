@@ -11,4 +11,5 @@
         android:name="com.example.android.characters.ui.detail.DetailFragment"
         android:label="DetailFragment"
         tools:layout="@layout/fragment_detail"/>
+
 </navigation>
