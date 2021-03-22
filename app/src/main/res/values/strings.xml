@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">TVCharacters</string>
+    <string name="order_asc">Ascending</string>
+    <string name="order_desc">Descending</string>
+    <string name="order_random">With Icons Only</string>
+    <string name="search_title">Search</string>
+    <string name="name">Name</string>
+    <string name="text">Text</string>
+    <string name="textview">TextView</string>
+
+</resources>
