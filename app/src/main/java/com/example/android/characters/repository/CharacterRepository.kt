@@ -51,7 +51,7 @@ class CharacterRepository(private val database: CharacterDatabase) {
 
     suspend fun searchCharactersFromDb(query: String) =
         withContext(context = Dispatchers.IO) {
-            database.DatabaseDao.getAllNamesFromDbFTS(query) //?: listOf()
+            database.DatabaseDao.searchStringFromDbFTS(query)
         }
 
     suspend fun getCharactersFromDb(selection: DisplayOrderEnum) =

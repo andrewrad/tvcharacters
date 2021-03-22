@@ -13,18 +13,18 @@ data class DbEntity(
     @PrimaryKey
     var name: String = ""
 ){
-    companion object {  //TODO:mapper
-        fun from(tvCharacterUiModel: TvCharacterUiModel): DbEntity {
-            return DbEntity(
-                tvCharacterUiModel.charId,
-                tvCharacterUiModel.firstUrl,
-                tvCharacterUiModel.icon,
-                tvCharacterUiModel.result,
-                tvCharacterUiModel.text,
-                tvCharacterUiModel.name
-            )
-        }
-    }
+//    companion object {  //TODO:mapper
+//        fun from(tvCharacterUiModel: TvCharacterUiModel): DbEntity {
+//            return DbEntity(
+//                tvCharacterUiModel.charId,
+//                tvCharacterUiModel.firstUrl,
+//                tvCharacterUiModel.icon,
+//                tvCharacterUiModel.result,
+//                tvCharacterUiModel.text,
+//                tvCharacterUiModel.name
+//            )
+//        }
+//    }
 //
 //    fun toTvCharacter(): TvCharacterUiModel {
 //        return TvCharacterUiModel(charId, firstUrl, icon, result, text, name)

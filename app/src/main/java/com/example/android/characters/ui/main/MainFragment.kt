@@ -6,15 +6,13 @@ import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+//import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.android.characters.DisplayOrderEnum
 import com.example.android.characters.R
-//import com.example.android.characters.database.DbEntity
 import com.example.android.characters.databinding.FragmentMainBinding
 import com.example.android.characters.databinding.FragmentMainLandBinding
-import com.example.android.characters.ui.toUiModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -46,7 +44,10 @@ class MainFragment : Fragment() {
                 binding.characterRecycler.adapter = adapter
 
                 viewModel.charactersFromDb.observe(viewLifecycleOwner, Observer {
-                    it?.let { it -> adapter.data(it.map { it.toUiModel() }) }
+                    it?.let { it ->
+                        adapter.data(it)
+                        viewModel.onCharacterClicked(it[0])
+                    }
                 })
 
                 setHasOptionsMenu(true)
@@ -68,7 +69,7 @@ class MainFragment : Fragment() {
                 binding.characterRecycler.adapter = adapter
 
                 viewModel.charactersFromDb.observe(viewLifecycleOwner, Observer { it ->
-                    it?.let { it -> adapter.data(it.map { it.toUiModel() }) }   //send data to the recyclerView adapter
+                    it?.let { it -> adapter.data(it) }   //send data to the recyclerView adapter
                 })
 
                 viewModel.charDetails.observe(viewLifecycleOwner, Observer {

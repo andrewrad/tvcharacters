@@ -21,6 +21,6 @@ interface DatabaseDao {
     @Query("select * from dbTable where icon != \"\" order by name asc")
     suspend fun getAllNamesFromDb(): List<DbEntity>
 
-    @Query("SELECT * FROM dbTable JOIN dbTableFts ON dbTable.name == dbTableFts.name WHERE dbTableFts.name MATCH :query") //MATCH :query OR dbTableFts.name MATCH :query")
-    suspend fun getAllNamesFromDbFTS(query: String): List<DbEntity>
+    @Query("SELECT * FROM dbTable JOIN dbTableFts ON dbTable.text == dbTableFts.text WHERE dbTableFts.text MATCH :query")
+    suspend fun searchStringFromDbFTS(query: String): List<DbEntity>  //search titles or descriptions- search .text column since they are both found in .text
 }
