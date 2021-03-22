@@ -1,11 +1,5 @@
 package com.example.android.characters.api
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
-
-//import kotlinx.parcelize.Parcelize  //old-> //import kotlinx.android.parcel.Parcelize
-
-
 data class CharacterResponse(
         val RelatedTopics : List<CharacterProperties>
 )

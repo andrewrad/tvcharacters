@@ -31,8 +31,8 @@ object CharacterApi{
 interface CharacterApiService {
 
     @GET(Util.APPENDED_URL)
-    suspend fun getSimpsonsCharacters() : CharacterResponse  //TODO:
+    suspend fun getSimpsonsCharacters() : CharacterResponse
 
     @GET("/i/{image_name}")
-    suspend fun getImage(@Path("image_name") image: String) //TODO:
+    suspend fun getImage(@Path("image_name") image: String)
 }

@@ -33,7 +33,7 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.38"/>
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/profile_nav_container"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="0dp"

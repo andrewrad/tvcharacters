@@ -10,6 +10,6 @@
         android:id="@+id/detailFragment2"
         android:name="com.example.android.characters.ui.detail.DetailFragment"
         android:label="DetailFragment"
-        tools:layout="@layout/fragment_detail"/>
+        tools:layout="@layout/fragment_detail" />
 
 </navigation>

@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Fts4(contentEntity = DbEntity::class)
 @Entity(tableName = "dbTableFts")
 class DbEntityFts(
-    @PrimaryKey//(autoGenerate = true)
+    @PrimaryKey
     var rowid: Int,  //needed for Fts object
     var charId: Long = 0L,
     var firstUrl: String = "",

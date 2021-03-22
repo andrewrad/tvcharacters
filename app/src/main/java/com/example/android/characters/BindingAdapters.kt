@@ -10,7 +10,6 @@ import com.example.android.characters.ui.TvCharacterUiModel
 
 
 //Recycler View list item binding:
-
 @BindingAdapter("textViewName")
 fun TextView.setTextViewName(item: TvCharacterUiModel?) {
     item?.let {
@@ -18,8 +17,7 @@ fun TextView.setTextViewName(item: TvCharacterUiModel?) {
     }
 }
 
-//DetailFragment binding views:
-
+//DetailFragment binding view for imageview
 @BindingAdapter("characterPicture")
 fun bindCharacterPicture(imgView: ImageView, item: TvCharacterUiModel) {
     val imgUrl = BASE_URL + item.icon
@@ -33,11 +31,13 @@ fun bindCharacterPicture(imgView: ImageView, item: TvCharacterUiModel) {
         .into(imgView)
 }
 
+//DetailFragment binding view for the textview showing name
 @BindingAdapter("detailTextViewName")
 fun TextView.setDetailTextViewName(item: TvCharacterUiModel) {
     text = item.name
 }
 
+//DetailFragment binding view for the textview showing block of text
 @BindingAdapter("detailTextViewText")
 fun TextView.setDetailTextViewText(item: TvCharacterUiModel) {
     text = item.text

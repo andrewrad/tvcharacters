@@ -1,7 +1,6 @@
 package com.example.android.characters.database
 
 import androidx.room.*
-import com.example.android.characters.ui.TvCharacterUiModel
 
 @Entity(tableName="dbTable")
 data class DbEntity(
@@ -12,21 +11,4 @@ data class DbEntity(
     var text: String = "",
     @PrimaryKey
     var name: String = ""
-){
-//    companion object {  //TODO:mapper
-//        fun from(tvCharacterUiModel: TvCharacterUiModel): DbEntity {
-//            return DbEntity(
-//                tvCharacterUiModel.charId,
-//                tvCharacterUiModel.firstUrl,
-//                tvCharacterUiModel.icon,
-//                tvCharacterUiModel.result,
-//                tvCharacterUiModel.text,
-//                tvCharacterUiModel.name
-//            )
-//        }
-//    }
-//
-//    fun toTvCharacter(): TvCharacterUiModel {
-//        return TvCharacterUiModel(charId, firstUrl, icon, result, text, name)
-//    }
-}
+){}
